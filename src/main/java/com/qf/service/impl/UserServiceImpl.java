@@ -23,7 +23,7 @@ public class UserServiceImpl implements UserService {
         return userDao.selectList(null);
     }
 
-//    登陆
+    //    登陆
     @Override
     public User login(String email, String password) {
         User user = userDao.selectById(email);
@@ -35,21 +35,25 @@ public class UserServiceImpl implements UserService {
         userDao.updateById(user);
     }
 
+
     @Override
     public Map<String, Object> updateOne(String email, String password) {
-
         return null;
     }
 
-
     @Override
-    public User findOne() {
-        return userDao.selectOne(null);
+    public User findOneById(long id) {
+        return userDao.selectById(id);
     }
 
     @Override
     public void addUser(User user) {
         userDao.insert(user);
+        if (user != null) {
+            System.out.println("添加成功");
+        } else {
+            System.out.println("添加失败");
+        }
     }
 
 

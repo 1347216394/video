@@ -1,5 +1,6 @@
 package com.qf.service;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.qf.pojo.User;
 
 import java.util.List;
@@ -15,7 +16,7 @@ public interface UserService {
 
     Map<String, Object> updateOne(String email,String password);
 
-    User findOne();
+    User findOneById(long id);
 
     void addUser(User user);
 }

@@ -1,5 +1,6 @@
 package com.qf.controller;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.qf.pojo.User;
 import com.qf.service.UserService;
 import io.swagger.annotations.Api;
@@ -38,8 +39,9 @@ public class UserController {
     @ApiOperation("查询一个用户")
     @RequestMapping("findOne")
     @ResponseBody
-    public User findOne() {
-        return userService.findOne();
+    public User findUser(long id) {
+        User user = userService.findOneById(id);
+        return user;
     }
 
     @ApiOperation("修改用户信息")
@@ -63,3 +65,5 @@ public class UserController {
         userService.addUser(user);
     }
 }
+
+

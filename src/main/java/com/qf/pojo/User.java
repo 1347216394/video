@@ -1,6 +1,7 @@
 package com.qf.pojo;
 
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
@@ -11,7 +12,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @ApiModel("用户")
-public class User {
+public class User{
 
   @ApiModelProperty("用户编号")
   private long id;
