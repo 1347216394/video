@@ -6,8 +6,10 @@ import com.qf.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -34,13 +36,20 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void updatePassword(HashMap<String, Object> map) {
+    public Map<String, Object> updateOne(String email, String password) {
 
+        return null;
     }
+
 
     @Override
     public User findOne() {
         return userDao.selectOne(null);
+    }
+
+    @Override
+    public void addUser(User user) {
+        userDao.insert(user);
     }
 
 
