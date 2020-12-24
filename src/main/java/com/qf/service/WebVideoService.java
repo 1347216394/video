@@ -1,14 +1,16 @@
 package com.qf.service;
 
+import com.qf.dto.WebVideoDto;
 import com.qf.pojo.WebVideo;
 
 import java.util.List;
 
 public interface WebVideoService {
-    WebVideo selectById(Integer id);
+    WebVideoDto selectById(Integer id);
 
-    List<WebVideo> selectAll();
+    List<WebVideoDto> selectAll();
 
-    List<WebVideo> select(Integer id);
+    List<WebVideoDto> select(Integer id);
 
+    void update(Integer id);
 }
