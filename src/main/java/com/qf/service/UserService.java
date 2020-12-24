@@ -14,9 +14,9 @@ public interface UserService {
 
     void updateUser(User user);
 
-    Map<String, Object> updateOne(String email,String password);
+    User selectUserByEmail(String email);
 
-    User findOneById(long id);
+    User findById(long id);
 
     void addUser(User user);
 }
