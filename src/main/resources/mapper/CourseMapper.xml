@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qf.dao.CourseDao">
+
+    <!--    嵌套查询的写法-->
+    <resultMap id="course" type="com.qf.pojo.Course">
+        <id column="id" property="id"></id>
+        <result column="course_title" property="courseTitle"></result>
+        <result column="course_desc" property="courseDesc"></result>
+        <result column="subject_id" property="subjectId"></result>
+        <!--        column执行另外一个sql语句需要的条件   另外一个sql语句select-->
+        <collection property="webVideoList"  ofType="com.qf.pojo.WebVideo"
+                    column="id" select="com.qf.dao.WebVideoDao.select" ></collection>
+    </resultMap>
+
+
+    <select id="selectById" parameterType="int" resultMap="course">
+        select  * from course where id = #{id}
+    </select>
+
+    <select id="selectList" resultMap="course">
+        select  * from course
+    </select>
+
+    <select id="select" resultMap="course">
+        select  * from course where subject_id = #{id}
+    </select>
+</mapper>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qf.dao.SubjectDao">
+
+    <resultMap id="subject" type="com.qf.pojo.Subject">
+        <id column="id" property="id"></id>
+        <result column="subject_name" property="subjectName"></result>
+        <collection property="courseList" ofType="com.qf.pojo.Course"
+                    column="id" select="com.qf.dao.CourseDao.select"></collection>
+    </resultMap>
+
+    <select id="selectById" parameterType="int" resultMap="subject">
+        select * from subject where id = #{id};
+    </select>
+
+    <select id="selectList" resultMap="subject">
+        select * from subject
+    </select>
+</mapper>
