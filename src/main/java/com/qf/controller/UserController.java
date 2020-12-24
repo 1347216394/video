@@ -23,32 +23,44 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    //    查询所有
     @ApiOperation("查询所有")
-    @RequestMapping("findAll")
+    @GetMapping("findAll")
     public List<User> fidAll() {
-        return userService.findAll();
+        return userService.selectList();
+    }
+
+    //    根据id查找
+    @GetMapping("findById")
+    public User findById(Integer id) {
+        return userService.selectById(id);
     }
 
     @ApiOperation("登陆")
-    @RequestMapping("login")
-    public User login(String email, String password) {
-        return userService.login(email, password);
+    @GetMapping("loginUser")
+    public User login(User user,HttpServletRequest request) {
+        user = userService.selectEmailAndPassword(user);
+        if (user != null) {
+            HttpSession session = request.getSession();
+            session.setAttribute("userAccount",user.getEmail());
+        }
+        return user;
     }
 
-    @ApiOperation("查询一个用户")
-    @RequestMapping("findOne")
-    public User findUser(Integer id) {
-        return userService.findById(id);
-    }
-
-    @ApiOperation("修改用户信息")
-    @RequestMapping("updateUser")
+    //    修改用户信息
+    @GetMapping("updateUser")
     public void updateUser(User user) {
         userService.updateUser(user);
     }
 
+    //    添加用户
+    @GetMapping("insertUser")
+    public void insertUser(User user) {
+        userService.insertUser(user);
+    }
+
     @ApiOperation("重置密码")
-    @RequestMapping("resetPassword")
+    @GetMapping("resetPassword")
     public String updatePassword(String email, String password, HttpServletRequest request) {
         HttpSession session = request.getSession();
         session.removeAttribute("email");
@@ -63,7 +75,7 @@ public class UserController {
     }
 
     //    上传图片
-    @RequestMapping("uploadImage")
+    @GetMapping("uploadImage")
     public String uploadImage(@RequestParam("image_file") MultipartFile imageFile, String x1, String x2, String y1, String y2, HttpServletRequest request) throws IOException {
         String path = "D:\\server\\apache-tomcat-8.5.31\\webapps\\video\\"; //讲师图片路径，需要再更改
         File file = new File(path);
@@ -81,17 +93,10 @@ public class UserController {
         int x2Int = (int) Double.parseDouble(x2);
         int y1Int = (int) Double.parseDouble(y1);
         int y2Int = (int) Double.parseDouble(y2);
-//        new ImageCut().cutImage(path);
+
 
         return null;
     }
 
 
-    @ApiOperation("添加注册")
-    @RequestMapping("addUser")
-    public void addUser(User user) {
-        userService.addUser(user);
-    }
 }
-
-

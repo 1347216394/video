@@ -1,22 +1,21 @@
 package com.qf.service;
 
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.qf.pojo.User;
 
 import java.util.List;
-import java.util.Map;
 
 public interface UserService {
 
-    List<User> findAll();
+    List<User> selectList();
 
-    User login(String email, String password);
+    User selectEmailAndPassword(User user);
 
-    void updateUser(User user);
+    void insertUser(User user);
 
     User selectUserByEmail(String email);
 
-    User findById(long id);
 
-    void addUser(User user);
+    User updateUser(User user);
+
+    User selectById(Integer id);
 }

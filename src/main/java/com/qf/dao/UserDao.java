@@ -1,10 +1,24 @@
 package com.qf.dao;
 
 
-import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+
 import com.qf.pojo.User;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
-public interface UserDao extends BaseMapper<User> {
+public interface UserDao {
+    List<User> selectList();
+
+    User selectById(Integer id);
+
+    User updateUser(User user);
+
+    void insertUser(User user);
+
+    User selectEmailAndPassword(User user);
+
+    User selectUserByEmail(String email);
+
 }
