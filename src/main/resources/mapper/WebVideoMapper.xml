@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qf.dao.WebVideoDao">
+
+    <resultMap id="course" type="com.qf.dto.WebVideoDto">
+        <id column="video.id" property="id"></id>
+        <result column="title" property="title"></result>
+        <result column="detail" property="detail"></result>
+        <result column="time" property="time"></result>
+        <result column="speaker_id" property="speakerId"></result>
+        <result column="course_id" property="courseId"></result>
+        <result column="video_id" property="videoId"></result>
+        <result column="image_url" property="imageUrl"></result>
+        <result column="play_num" property="playNum"></result>
+        <result column="speaker_name" property="speakerName"></result>
+        <result column="speaker_desc" property="speakerDesc"></result>
+        <result column="speaker_job" property="speakerJob"></result>
+        <result column="head_img_url" property="headImgUrl"></result>
+    </resultMap>
+
+
+    <select id="select" parameterType="int" resultMap="course">
+        select * from video
+        left join speaker on speaker.id = video.speaker_id
+        where course_id = #{id}
+    </select>
+
+    <select id="selectById" parameterType="int" resultMap="course">
+        select * from video
+        left join speaker on speaker.id = video.speaker_id
+        where video.id = #{id}
+    </select>
+
+    <select id="selectList" parameterType="int" resultMap="course">
+         select * from video
+        left join speaker on speaker.id = video.speaker_id
+    </select>
+
+    <update id="update" parameterType="int">
+        update video set play_num = play_num + 1 where id = #{id}
+    </update>
+
+</mapper>
