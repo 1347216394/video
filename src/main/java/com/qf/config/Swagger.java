@@ -19,7 +19,7 @@ public class Swagger {
         return new Docket(DocumentationType.SWAGGER_2)
                 //.apiInfo(ApiInfo.DEFAULT);
                 .apiInfo(createApiInfo())
-                .groupName("芜湖起飞")
+                .groupName("java2007")
                 .enable(true)
                 .select().apis(RequestHandlerSelectors.basePackage("com.qf.controller"))
                 .build();
