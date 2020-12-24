@@ -1,7 +1,7 @@
 package com.qf.service.impl;
 
 import com.qf.dao.WebVideoDao;
-import com.qf.pojo.WebVideo;
+import com.qf.dto.WebVideoDto;
 import com.qf.service.WebVideoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,19 +15,24 @@ public class WebVideoServiceImpl implements WebVideoService {
 
 
     @Override
-    public WebVideo selectById(Integer id) {
-        WebVideo webVideo = webVideoDao.selectById(id);
+    public WebVideoDto selectById(Integer id) {
+        WebVideoDto webVideo = webVideoDao.selectById(id);
         return webVideo;
     }
 
     @Override
-    public List<WebVideo> selectAll() {
+    public List<WebVideoDto> selectAll() {
         return webVideoDao.selectList();
     }
 
     @Override
-    public List<WebVideo> select(Integer id) {
+    public List<WebVideoDto> select(Integer id) {
         return webVideoDao.select(id);
+    }
+
+    @Override
+    public void update(Integer id) {
+        webVideoDao.update(id);
     }
 
 

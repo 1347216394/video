@@ -1,15 +1,19 @@
 package com.qf.dao;
 
+import com.qf.dto.WebVideoDto;
 import com.qf.pojo.WebVideo;
 import org.springframework.stereotype.Repository;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
 @Repository
 public interface WebVideoDao {
-    WebVideo selectById(Integer id);
+    WebVideoDto selectById(Integer id);
 
-    List<WebVideo> selectList();
+    List<WebVideoDto> selectList();
 
-    List<WebVideo> select(Integer id);
+    List<WebVideoDto> select(Integer id);
+
+    void update(Integer id);
 }

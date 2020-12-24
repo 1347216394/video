@@ -10,7 +10,7 @@
         <result column="course_desc" property="courseDesc"></result>
         <result column="subject_id" property="subjectId"></result>
         <!--        column执行另外一个sql语句需要的条件   另外一个sql语句select-->
-        <collection property="webVideoList"  ofType="com.qf.pojo.WebVideo"
+        <collection property="webVideoList"  ofType="com.qf.dto.WebVideoDto"
                     column="id" select="com.qf.dao.WebVideoDao.select" ></collection>
     </resultMap>
 

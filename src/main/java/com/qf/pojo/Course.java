@@ -1,5 +1,6 @@
 package com.qf.pojo;
 
+import com.qf.dto.WebVideoDto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -15,5 +16,5 @@ public class Course {
     private String courseTitle;
     private String courseDesc;
     private Integer subjectId;
-    private List<WebVideo> webVideoList;
+    private List<WebVideoDto> webVideoList;
 }
