@@ -27,6 +27,12 @@ public class UserServiceImpl implements UserService {
     @Override
     public User login(String email, String password) {
         User user = userDao.selectById(email);
+        if (email == null) {
+            System.out.println("用户名错误！");
+        }
+        if (!email.equals(password)){
+            System.out.println("密码错误!");
+        }
         return user;
     }
 
@@ -35,14 +41,13 @@ public class UserServiceImpl implements UserService {
         userDao.updateById(user);
     }
 
-
     @Override
-    public Map<String, Object> updateOne(String email, String password) {
-        return null;
+    public User selectUserByEmail(String email) {
+        return userDao.selectById(email);
     }
 
     @Override
-    public User findOneById(long id) {
+    public User findById(long id) {
         return userDao.selectById(id);
     }
 
