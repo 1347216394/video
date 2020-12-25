@@ -14,8 +14,7 @@ public interface UserService {
 
     User selectUserByEmail(String email);
 
-
-    User updateUser(User user);
+    void updateUser(User user);
 
     User selectById(Integer id);
 }

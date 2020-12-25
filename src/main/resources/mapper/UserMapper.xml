@@ -9,7 +9,7 @@
     </select>
 
     <!--    查找邮箱和密码-->
-    <select id="selectEmailAndPassword" parameterType="string" resultType="com.qf.pojo.User">
+    <select id="selectEmailAndPassword" resultType="com.qf.pojo.User">
         select *
         from user
         where email = #{email}
@@ -17,21 +17,21 @@
     </select>
 
     <!--    根据id查找-->
-    <select id="selectById" parameterType="int" resultType="com.qf.pojo.User">
+    <select id="selectById" resultType="com.qf.pojo.User">
         select *
         from user
         where id = #{id}
     </select>
 
     <!--    根据email查找-->
-    <select id="selectUserByEmail" parameterType="string" resultType="com.qf.pojo.User">
+    <select id="selectUserByEmail" resultType="com.qf.pojo.User">
         select *
         from user
         where email = #{email}
     </select>
 
     <!--    根据id修改信息-->
-    <update id="updateUser" parameterType="user">
+    <update id="updateUser">
         update user
         set email=#{email},
             phoneNum=#{phoneNum},
@@ -47,10 +47,9 @@
     </update>
 
     <!--    添加用户-->
-    <insert id="insertUser" parameterType="user">
-        INSERT INTO user
-        (email, phoneNum, password, code, nickName, sex, birthday, address, imgUrl, createTime)
-        VALUES (#(email), #(phoneNum), #(password), #(code), #(nickName), #(sex), #(birthday), #(address), #(imgUrl),
-                #(createTime))
+    <insert id="insertUser">
+        INSERT INTO user(email, phoneNum, password, code, nickName, sex, birthday, address, imgUrl, createTime)
+        VALUES (#{email}, #{phoneNum}, #{password}, #{code}, #{nickName}, #{sex}, #{birthday}, #{address}, #{imgUrl},
+                #{createTime} )
     </insert>
 </mapper>

@@ -13,7 +13,7 @@ public interface UserDao {
 
     User selectById(Integer id);
 
-    User updateUser(User user);
+    void updateUser(User user);
 
     void insertUser(User user);
 

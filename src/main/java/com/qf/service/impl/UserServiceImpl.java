@@ -59,9 +59,10 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User updateUser(User user) {
-        return userDao.updateUser(user);
+    public void updateUser(User user) {
+        userDao.updateUser(user);
     }
+
 
     //    根据id查找
     @Override

@@ -2,8 +2,10 @@ package com.qf.controller;
 
 import com.qf.pojo.User;
 import com.qf.service.UserService;
+import com.qf.videos.utils.ImageCut;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -48,12 +50,14 @@ public class UserController {
     }
 
     //    修改用户信息
+    @ApiOperation("修改用户")
     @GetMapping("updateUser")
     public void updateUser(User user) {
         userService.updateUser(user);
     }
 
     //    添加用户
+    @ApiOperation("添加用户")
     @GetMapping("insertUser")
     public void insertUser(User user) {
         userService.insertUser(user);
@@ -74,29 +78,32 @@ public class UserController {
         return "redirect:/";
     }
 
-    //    上传图片
-    @GetMapping("uploadImage")
-    public String uploadImage(@RequestParam("image_file") MultipartFile imageFile, String x1, String x2, String y1, String y2, HttpServletRequest request) throws IOException {
-        String path = "D:\\server\\apache-tomcat-8.5.31\\webapps\\video\\"; //讲师图片路径，需要再更改
+    @RequestMapping("/upLoadImage")
+    public String upLoadImage(@RequestParam("image_file") MultipartFile imageFile, String x1, String x2, String y1, String y2, HttpServletRequest request) throws IOException {
+        String path = "D:\\server\\apache-tomcat-8.5.31\\webapps\\video\\";
         File file = new File(path);
         if (!file.exists()) {
             file.mkdirs();
         }
-//        截取图片大小
+
         String filename = imageFile.getOriginalFilename();
         filename = filename.substring(filename.lastIndexOf("."));
         String uuid = UUID.randomUUID().toString().replace("-", "");
         filename = uuid + filename;
         imageFile.transferTo(new File(path, filename));
 
+
         int x1Int = (int) Double.parseDouble(x1);
         int x2Int = (int) Double.parseDouble(x2);
         int y1Int = (int) Double.parseDouble(y1);
         int y2Int = (int) Double.parseDouble(y2);
+        new ImageCut().cutImage(path + "/" + filename, x1Int, y1Int, x2Int - x1Int, y2Int - y1Int);
 
+        HttpSession session = request.getSession();
+        User user = (User) session.getAttribute("user");
+        user.setImgUrl(filename);
+        userService.updateUser(user);
 
-        return null;
+        return "redirect:/user/showMyProfile";
     }
-
-
 }
