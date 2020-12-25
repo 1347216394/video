@@ -11,5 +11,4 @@ public class VideoApplication {
     public static void main(String[] args) {
         SpringApplication.run(VideoApplication.class, args);
     }
-
 }

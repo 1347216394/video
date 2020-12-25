@@ -40,13 +40,21 @@ public class UserController {
 
     @ApiOperation("登陆")
     @GetMapping("loginUser")
-    public User login(User user,HttpServletRequest request) {
+    public User login(User user, HttpServletRequest request) {
         user = userService.selectEmailAndPassword(user);
         if (user != null) {
             HttpSession session = request.getSession();
-            session.setAttribute("userAccount",user.getEmail());
+            session.setAttribute("userAccount", user.getEmail());
         }
         return user;
+    }
+
+    @RequestMapping("logOut")
+    public String logOut(HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        session.removeAttribute("user");
+        session.removeAttribute("userAccount");
+        return "success";
     }
 
     //    修改用户信息
@@ -63,6 +71,7 @@ public class UserController {
         userService.insertUser(user);
     }
 
+    //    修改密码
     @ApiOperation("重置密码")
     @GetMapping("resetPassword")
     public String updatePassword(String email, String password, HttpServletRequest request) {
@@ -78,9 +87,10 @@ public class UserController {
         return "redirect:/";
     }
 
+    //    上传
     @RequestMapping("/upLoadImage")
     public String upLoadImage(@RequestParam("image_file") MultipartFile imageFile, String x1, String x2, String y1, String y2, HttpServletRequest request) throws IOException {
-        String path = "D:\\server\\apache-tomcat-8.5.31\\webapps\\video\\";
+        String path = "E:\\upload";
         File file = new File(path);
         if (!file.exists()) {
             file.mkdirs();
