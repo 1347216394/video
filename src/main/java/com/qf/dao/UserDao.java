@@ -9,6 +9,7 @@ import java.util.List;
 
 @Repository
 public interface UserDao {
+
     List<User> selectList();
 
     User selectById(Integer id);

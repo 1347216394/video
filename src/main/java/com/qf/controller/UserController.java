@@ -7,6 +7,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -88,8 +89,8 @@ public class UserController {
     }
 
     //    上传
-    @RequestMapping("/upLoadImage")
-    public String upLoadImage(@RequestParam("image_file") MultipartFile imageFile, String x1, String x2, String y1, String y2, HttpServletRequest request) throws IOException {
+    @RequestMapping("/upload")
+    public String upLoadImage(@RequestParam("upfile") MultipartFile imageFile, String x1, String x2, String y1, String y2, HttpServletRequest request) throws IOException {
         String path = "E:\\upload";
         File file = new File(path);
         if (!file.exists()) {
@@ -114,6 +115,12 @@ public class UserController {
         user.setImgUrl(filename);
         userService.updateUser(user);
 
-        return "redirect:/user/showMyProfile";
+        return "success";
     }
+//
+//    @RequestMapping("upda")
+//    public String login1(){
+//        System.out.println("1");
+//        return "/upload";
+//    }
 }
